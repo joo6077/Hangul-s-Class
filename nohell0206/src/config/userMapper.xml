@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 디비의 테이블을 맵팽 설정하는 놈 -->
+<!-- 실제 쿼리들이 들어간다. -->
+<mapper namespace="userSession">
+	<insert id="insertUser" parameterType="User">
+		<!-- #{} get메소드 호출! -->	
+		insert into users values(#{userId},#{name},#{nickname})
+	</insert>
+	
+	<select id="selectUserList" resultType="User">
+		select user_id, name, nickname from users
+	</select>
+	
+	<delete id="deleteUser" parameterType="string">
+		delete from users where user_id=#{user_id}
+	</delete>
+	
+	<select id="selectUserById" parameterType="string" resultType="User">
+		select user_id, name, nickname
+		from users
+		where user_id=#{id}
+	</select>
+	
+	<update id="updateUser" parameterType="User">
+		update users set name = #{name},
+		nickname = #{nickname}
+		where user_id = #{userId}
+	</update>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="spring.user"></context:component-scan>
+
+	<!-- 디비설정이 있는 프로퍼티 파일 가져오기 -->
+	<context:property-placeholder location="classpath:config/dbInfo.properties"/>
+
+	<!-- dataSource 설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driverClass}"/>
+		<property name="url" value="${db.url}"/>
+		<property name="username" value="${db.username}"/>
+		<property name="password" value="${db.password}"/>
+	</bean>
+	
+	<!-- Mybatis-spring 설정 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- database 접속 dataSource 셋팅 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 마이바티스 설정정보를 셋팅 -->
+		<property name="configLocation" value="classpath:config/SqlMybatisConfig.xml"/>
+		<!-- 매퍼(쿼리)도 셋팅 -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/userMapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- sqlSession(매퍼로 셋팅한 쿼리문을 날려줌) 객체를 만들자 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
+	</bean>
+	
+	
+</beans>
