@@ -28,6 +28,7 @@ public class Mytest {
 	public void test() {
 		userDao.insert(new UserDto("luffy", "priateKing", "strawHat"));
 		//ÇüÁÖ
+		//±½º
 	}
 	
 }
