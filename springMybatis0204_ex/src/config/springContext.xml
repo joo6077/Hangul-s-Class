@@ -28,5 +28,6 @@
 	
 	<!-- mybatisMapper 등록 -->
 	<mybatis-spring:scan base-package="spring.mapper"/>
+	<!-- 앙 -->
 
 </beans>
