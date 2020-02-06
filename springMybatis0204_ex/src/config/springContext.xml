@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="spring"></context:component-scan>
+	
+	<!-- 프로퍼티 값 가져오기 -->
+	<context:property-placeholder location="classpath:config/dbInfo.properties"/>
+	
+	<!-- 디비 접속 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driverClass}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+		<property name="url" value="${db.url}"></property>
+	</bean>
+	
+	<!-- mybatisSpring 등록 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="file:src/config/settingConfig.xml"></property>
+	</bean>
+	
+	<!-- mybatisMapper 등록 -->
+	<mybatis-spring:scan base-package="spring.mapper"/>
+	<!-- 앙 -->
+
+</beans>
