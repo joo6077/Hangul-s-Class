@@ -29,6 +29,7 @@ public class Mytest {
 		userDao.insert(new UserDto("luffy", "priateKing", "strawHat"));
 		//형주
 		//옼스
+		//형주야 공부좀하자.
 	}
 	
 }
