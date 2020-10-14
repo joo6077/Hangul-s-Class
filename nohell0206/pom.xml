@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.13.1</version>
 		</dependency>
 		<!-- spring jdbc 컨트롤 해줌. 메소드 기능들.. -->
 		<dependency>
